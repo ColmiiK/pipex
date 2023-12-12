@@ -1,7 +1,6 @@
 #Variables
 
 NAME = pipex
-USER = alvega-g
 INCLUDE = include
 LIBFT = lib/libft
 SRC_DIR = src/
@@ -26,7 +25,7 @@ WHITE = \033[0;97m
 
 #Sources
 	
-SRC_FILES = 
+SRC_FILES = main
 B_SRC_FILES = 
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
