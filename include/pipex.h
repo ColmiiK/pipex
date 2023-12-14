@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:56:08 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/13 13:53:40 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:36:44 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 typedef struct s_data
 {
 	char **path;
-	char ***command;
+	char ***args;
+	char **command;
 
 
 }	t_data;
