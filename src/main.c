@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/14 15:22:48 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:03:55 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 		check next data->path
 		
 
+	data->args[i][j][k]:
+	
+		i ->	{"ls -l"} 
+				{"wc -l"}
+			
+		j ->->		{"ls"}
+					{"-l"}
+		
+		k ->->->		{"l"}
+						{"s"}
+
 */
 
 void ft_access_cmds(t_data *data)
@@ -41,13 +52,14 @@ void ft_access_cmds(t_data *data)
 	while (data->path[++i])
 	{
 		k = -1;
-		while(data->args[++k][0]) // <- SEG FAULT AT k == 3 (Check for number of data->args?)
+		while(data->args[++k][0])
 		{
 			temp = ft_strjoin(data->path[i], data->args[k][0]);
 			if (access(temp, X_OK) != -1)
 				data->command[++j] = ft_strdup(temp);
 		}
 	}
+	data->command[++j] = NULL;
 }
 
 void ft_parse_cmds(t_data *data, int ac, char **av)
@@ -65,8 +77,14 @@ void ft_parse_cmds(t_data *data, int ac, char **av)
 	}
 	while (++j < (ac - 1))
 		data->args[++i] = ft_split(av[j], ' ');
+	data->args[++i] = ft_calloc(1, 1);
+	data->command = (char **)malloc(sizeof(char *) * (ac - 3));
+	if (!data->command)
+	{
+		ft_printf("Error: unable to malloc.\n");
+		exit(EXIT_FAILURE);
+	}
 	ft_access_cmds(data);
-	return ;
 }
 
 void ft_find_path(t_data *data, char **envp)
