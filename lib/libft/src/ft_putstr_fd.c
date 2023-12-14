@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:43:44 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:20:19 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:33:42 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {

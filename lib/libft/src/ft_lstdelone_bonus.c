@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 12:17:37 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:19:32 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:33:07 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {

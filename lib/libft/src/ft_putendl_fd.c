@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:46:33 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:20:10 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:33:36 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 void	ft_putendl_fd(char *s, int fd)
 {

@@ -7,7 +7,7 @@ SRC_DIR = src/
 B_SRC_DIR = src/bonus/
 OBJ_DIR = obj/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
 AR = ar rcs
 
@@ -79,4 +79,7 @@ bonus: $(B_OBJ)
 			@$(CC) $(CFLAGS) $(B_OBJ) -L$(LIBFT) -lft -o $(NAME)
 			@echo "$(MAGENTA)$(NAME) bonus compiled!$(DEF_COLOR)"
 
-.PHONY: all clean fclean re norm
+test:
+			./pipex infile "ls -l" "wc -l" outfile
+
+.PHONY: all clean fclean re norm test

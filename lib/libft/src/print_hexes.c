@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:56:52 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:21:17 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:34:34 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 static int	hex_long(char *base, unsigned long long n, int i)
 {

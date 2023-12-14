@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:37:13 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:19:19 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:32:58 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 int	ft_isprint(int c)
 {

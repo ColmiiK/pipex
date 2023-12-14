@@ -1,21 +1,15 @@
+#Variables
+
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror
-SRCDIR = src
-OBJDIR = obj
-SOURCES = \
-	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memcpy.c ft_memmove.c \
-	ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
-	ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
-	ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c ft_printf.c print_characters.c \
-	print_hexes.c print_numbers.c
-BSOURCES = \
-	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
-	ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.c=.o))
-BOBJECTS = $(addprefix $(OBJDIR)/, $(BSOURCES:.c=.o))
+INCLUDE = include
+SRC_DIR = src/
+OBJ_DIR = obj/
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -f
+AR = ar rcs
+
+# Colors
 
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
@@ -27,31 +21,58 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-all: $(NAME)
-	@echo "$(GREEN)Libft compiled!$(DEF_COLOR)"
+#Sources
+	
+SRC_FILES = ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint \
+	ft_strlen ft_memset ft_bzero ft_memcpy ft_memcpy ft_memmove \
+	ft_strlcpy ft_strlcat ft_toupper ft_tolower ft_strchr \
+	ft_strrchr ft_strncmp ft_memchr ft_memcmp ft_strnstr ft_atoi \
+	ft_calloc ft_strdup ft_substr ft_strjoin ft_strtrim ft_split \
+	ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd \
+	ft_putendl_fd ft_putnbr_fd get_next_line ft_printf print_characters \
+	print_hexes print_numbers ft_realloc
+	
+B_SRC_FILES = ft_lstnew_bonus ft_lstadd_front_bonus ft_lstsize_bonus ft_lstlast_bonus ft_lstadd_back_bonus \
+	ft_lstdelone_bonus ft_lstclear_bonus ft_lstiter_bonus ft_lstmap_bonus
 
-$(NAME): $(OBJECTS)
-	@ar -rc $@ $?
-	@echo "$(YELLOW)Compiling libft...$(DEF_COLOR)"
+SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+B_SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(B_SRC_FILES)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+B_OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(B_SRC_FILES)))
+OBJF = .cache_exists
 
-bonus: $(OBJECTS) $(BOBJECTS)
-	@ar -r $(NAME) $?
-	@echo "$(GREEN)Bonus libft compiled!$(DEF_COLOR)"
+###
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@gcc -c $(CFLAGS) $< -o $@
-	@echo "$(CYAN)Compiling $<...$(DEF_COLOR)"
+all:		$(NAME)
 
-$(shell if [ ! -d "$(OBJDIR)" ]; then mkdir -p $(OBJDIR); fi)
+$(NAME):	$(OBJ)
+			@ar -rc $@ $?
+			@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) -I./$(INCLUDE) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(B_SRC_DIR)%.c | $(OBJF)
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) -I./$(INCLUDE) $(CFLAGS) -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
 
 clean:
-	@rm -rf $(OBJDIR)
-	@echo "$(RED)Object files removed!$(DEF_COLOR)"
+			@$(RM) -rf $(OBJ_DIR)
+			@echo "$(CYAN)$(NAME) object files cleaned!$(DEF_COLOR)"
 
-fclean: clean
-	@rm -f $(NAME)
-	@echo "$(RED)Libft removed!$(DEF_COLOR)"
+fclean:		
+			@$(RM) -rf $(OBJ_DIR)
+			@$(RM) -f $(NAME)
+			@echo "$(BLUE)$(NAME) executable cleaned!$(DEF_COLOR)"
 
-re: fclean all
+re:			fclean all
+			@echo "$(MAGENTA)$(NAME) recompiled!$(DEF_COLOR)"
 
-.PHONY: all bonus clean fclean re
+norm:
+			@norminette $(SRC) $(B_SRC) $(INCLUDE)
+
+.PHONY: all clean fclean re norm

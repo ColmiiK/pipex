@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:56:19 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/12 10:55:08 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:46:24 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,5 +485,21 @@ int					print_pointer(void *ptr);
  * 		from the file descriptor.
  */
 char				*get_next_line(int fd);
+
+/**
+ * @brief Reallocates a block of memory.
+ *
+ * The ft_realloc function reallocates a block of memory that was previously
+ * allocated with malloc or calloc. The size of the memory block is changed to
+ * the size specified by the new_size parameter. The contents of the memory
+ * block are preserved up to the lesser of the new and old sizes. If the new
+ * size is larger, the additional memory is uninitialized.
+ *
+ * @param ptr A pointer to the previously allocated memory block.
+ * @param new_size The new size of the memory block, in bytes.
+ * @return A pointer to the reallocated memory block, or NULL if the operation
+ * failed.
+ */
+void				*ft_realloc(void *ptr, size_t new_size);
 
 #endif

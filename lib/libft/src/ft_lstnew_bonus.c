@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 13:43:55 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/11/13 14:19:45 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:33:15 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 t_list	*ft_lstnew(void *content)
 {

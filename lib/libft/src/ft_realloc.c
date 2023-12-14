@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 18:37:26 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/14 11:33:49 by alvega-g         ###   ########.fr       */
+/*   Created: 2023/12/14 11:22:24 by alvega-g          #+#    #+#             */
+/*   Updated: 2023/12/14 11:42:12 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	int	i;
+	void	*new_ptr;
 
-	i = 0;
-	while (c > 255)
-		c -= 256;
-	while (s[i])
+	new_ptr = NULL;
+	if (size == 0)
+		return (free(ptr), NULL);
+	if (ptr == NULL)
+		new_ptr = malloc(size);
+	else
 	{
-		if (c == s[i])
-			return ((char *)&s[i]);
-		else
-			i++;
+		new_ptr = malloc(size);
+		if (new_ptr)
+		{
+			ft_memcpy(new_ptr, ptr, size);
+			free(ptr);
+		}
 	}
-	if (c == '\0')
-		return ((char *)&s[i++]);
-	return (0);
+	return (new_ptr);
 }
-
-// int main()
-// {
-// 	char *s = "Hola";
-
-// 	printf("%s\n", ft_strchr(s, 'a' + 256));
-// }
