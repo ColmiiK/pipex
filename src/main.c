@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/14 20:03:55 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/15 11:24:53 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void ft_access_cmds(t_data *data)
 		k = -1;
 		while(data->args[++k][0])
 		{
-			temp = ft_strjoin(data->path[i], data->args[k][0]);
+			temp = ft_strjoin(data->path[i], data->args[k][0]); // <- FREE THIS
 			if (access(temp, X_OK) != -1)
 				data->command[++j] = ft_strdup(temp);
 		}
@@ -122,7 +122,7 @@ void debug_print(t_data *data, int ac)
 			ft_printf("%s\n", data->args[i][j]);
 		ft_printf("\n");
 	}
-	ft_printf("\nCommands\n");
+	ft_printf("\nCommands:\n");
 	for (int i = 0; data->command[i]; i++)
 		ft_printf("%s\n", data->command[i]);
 }
