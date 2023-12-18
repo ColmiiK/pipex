@@ -25,7 +25,7 @@ WHITE = \033[0;97m
 
 #Sources
 	
-SRC_FILES = main parsing error
+SRC_FILES = main parsing utils
 B_SRC_FILES = 
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
