@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/15 11:24:53 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:33:41 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void ft_parse_cmds(t_data *data, int ac, char **av)
 
 	i = -1;
 	j = 1;
-	data->args = (char ***)malloc(sizeof(char **) * (ac - 3));
+	data->args = (char ***)malloc(sizeof(char **) * (ac - 2));
 	if (!data->args)
 	{
 		ft_printf("Error: unable to malloc.\n");
@@ -97,13 +97,14 @@ void ft_find_path(t_data *data, char **envp)
 	{
 		if (ft_strnstr(envp[i], "PATH=", 5))
 		{
-			data->path = ft_split(envp[i], ':');
-			data->path[0] += 5;
+			data->path = ft_split(envp[i] + 5, ':');
 			i = -1;
 			while (data->path[++i])
 			{
 				j = ft_strlen(data->path[i]);
+				data->path[i] = ft_realloc(data->path[i], j + 2);
 				data->path[i][j] = '/';
+				data->path[i][j + 1] = 0;
 			}
 			return ;
 		}
@@ -132,7 +133,7 @@ int main(int ac, char **av, char **envp)
 {
 	t_data *data;
 
-	data = (t_data *)malloc(sizeof(t_data *));
+	data = (t_data *)malloc(sizeof(t_data));
 	ft_find_path(data, envp);
 	ft_parse_cmds(data, ac, av);
 
