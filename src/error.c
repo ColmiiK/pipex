@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 15:56:08 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/18 13:21:47 by alvega-g         ###   ########.fr       */
+/*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
+/*   Updated: 2023/12/18 13:53:33 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include <pipex.h>
 
-#include "../lib/libft/include/libft.h"
-#include <sys/wait.h>
-
-typedef struct s_data
+void ft_perror(char *str)
 {
-	char **path;
-	char ***args;
-	char **command;
-
-
-}	t_data;
-
-void ft_parsing(t_data *data, char **envp, int ac, char **av);
-void ft_perror(char *str);
-
-#endif
+	ft_printf("%s\n", str);
+	exit(EXIT_FAILURE);
+}

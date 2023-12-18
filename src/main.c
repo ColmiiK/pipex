@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/18 12:33:41 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:52:49 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,77 +40,6 @@
 
 */
 
-void ft_access_cmds(t_data *data)
-{
-	int i;
-	int j;
-	int k;
-	char *temp;
-
-	i = -1;
-	j = -1;
-	while (data->path[++i])
-	{
-		k = -1;
-		while(data->args[++k][0])
-		{
-			temp = ft_strjoin(data->path[i], data->args[k][0]); // <- FREE THIS
-			if (access(temp, X_OK) != -1)
-				data->command[++j] = ft_strdup(temp);
-		}
-	}
-	data->command[++j] = NULL;
-}
-
-void ft_parse_cmds(t_data *data, int ac, char **av)
-{
-	int i;
-	int j;
-
-	i = -1;
-	j = 1;
-	data->args = (char ***)malloc(sizeof(char **) * (ac - 2));
-	if (!data->args)
-	{
-		ft_printf("Error: unable to malloc.\n");
-		exit(EXIT_FAILURE);
-	}
-	while (++j < (ac - 1))
-		data->args[++i] = ft_split(av[j], ' ');
-	data->args[++i] = ft_calloc(1, 1);
-	data->command = (char **)malloc(sizeof(char *) * (ac - 3));
-	if (!data->command)
-	{
-		ft_printf("Error: unable to malloc.\n");
-		exit(EXIT_FAILURE);
-	}
-	ft_access_cmds(data);
-}
-
-void ft_find_path(t_data *data, char **envp)
-{
-	int i;
-	int j;
-	
-	i = -1;
-	while (envp[++i])
-	{
-		if (ft_strnstr(envp[i], "PATH=", 5))
-		{
-			data->path = ft_split(envp[i] + 5, ':');
-			i = -1;
-			while (data->path[++i])
-			{
-				j = ft_strlen(data->path[i]);
-				data->path[i] = ft_realloc(data->path[i], j + 2);
-				data->path[i][j] = '/';
-				data->path[i][j + 1] = 0;
-			}
-			return ;
-		}
-	}
-}
-
 void debug_print(t_data *data, int ac)
 {
 	ft_printf("Paths:\n");
@@ -128,15 +57,21 @@ void debug_print(t_data *data, int ac)
 		ft_printf("%s\n", data->command[i]);
 }
 
+void leaks(void)
+{
+	system ("leaks -q pipex");
+}
 
 int main(int ac, char **av, char **envp)
 {
 	t_data *data;
 
+	atexit(leaks);
 	data = (t_data *)malloc(sizeof(t_data));
-	ft_find_path(data, envp);
-	ft_parse_cmds(data, ac, av);
-
+	if (!data)
+		ft_perror("Error: unable to malloc (data).");
+	ft_parsing(data, envp, ac, av);
 	debug_print(data, ac);
-	exit(EXIT_SUCCESS);
+	// exit(EXIT_SUCCESS);
+	return (0);
 }
