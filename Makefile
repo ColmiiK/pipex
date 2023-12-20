@@ -8,7 +8,6 @@ B_SRC_DIR = src/bonus/
 OBJ_DIR = obj/
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
-RM = rm -f
 AR = ar rcs
 
 # Colors
@@ -56,16 +55,14 @@ $(OBJF):
 			@mkdir -p $(OBJ_DIR)
 
 clean:
-			@$(RM) -rf $(OBJ_DIR)
+			@rm -rf $(OBJ_DIR)
 			@make clean -C $(LIBFT)
-			@echo "$(CYAN)libft object files cleaned!$(DEF_COLOR)"
 			@echo "$(BLUE)$(NAME) object files cleaned!$(DEF_COLOR)"
 
 fclean:		
-			@$(RM) -rf $(OBJ_DIR)
-			@$(RM) -f $(NAME)
+			@rm -rf $(OBJ_DIR)
+			@rm -f $(NAME)
 			@make fclean -C $(LIBFT)
-			@echo "$(CYAN)libft executable cleaned!$(DEF_COLOR)"
 			@echo "$(BLUE)$(NAME) executable cleaned!$(DEF_COLOR)"
 
 re:			fclean all

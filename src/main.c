@@ -6,39 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/20 12:08:28 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:21:45 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
-
-/*
-
-	$> <infile ls -l | wc -l >outfile
-	./pipex infile "ls -l" "wc -l" outfile
-	av[2] -> av[ac - 2] (n pipes)
-
-
-	data->args[i][0] <- args to check (ls, wc, ...)
-	
-	if (data->path[i] + data->args[i][0] is accesible)
-		all okay, store in data->command
-	else
-		check next data->path
-		
-
-	data->args[i][j][k]:
-	
-		i ->	{"ls -l"} 
-				{"wc -l"}
-			
-		j ->->		{"ls"}
-					{"-l"}
-		
-		k ->->->		{"l"}
-						{"s"}
-
-*/
 
 void debug_print(t_data *data, int ac)
 {
@@ -76,7 +48,7 @@ int main(int ac, char **av, char **envp)
 	data->i = 0;
 	ft_parsing(data, envp, ac, av);
 	// debug_print(data, ac);
-	ft_execute(data, av[1], av[ac - 1], envp);
+	ft_execute(data, envp);
 
 	ft_annihilation(data);
 	return (0);

@@ -47,14 +47,14 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@ar -rc $@ $?
-			@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
+			@echo "$(CYAN)$(NAME) compiled!$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@echo "$(CYAN)Compiling: $< $(DEF_COLOR)"
 			@$(CC) -I./$(INCLUDE) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(B_SRC_DIR)%.c | $(OBJF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@echo "$(CYAN)Compiling: $< $(DEF_COLOR)"
 			@$(CC) -I./$(INCLUDE) $(CFLAGS) -c $< -o $@
 
 $(OBJF):
@@ -67,10 +67,10 @@ clean:
 fclean:		
 			@$(RM) -rf $(OBJ_DIR)
 			@$(RM) -f $(NAME)
-			@echo "$(BLUE)$(NAME) executable cleaned!$(DEF_COLOR)"
+			@echo "$(CYAN)$(NAME) executable cleaned!$(DEF_COLOR)"
 
 re:			fclean all
-			@echo "$(MAGENTA)$(NAME) recompiled!$(DEF_COLOR)"
+			@echo "$(CYAN)$(NAME) recompiled!$(DEF_COLOR)"
 
 norm:
 			@norminette $(SRC) $(B_SRC) $(INCLUDE)
