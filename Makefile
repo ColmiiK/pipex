@@ -25,7 +25,7 @@ WHITE = \033[0;97m
 
 #Sources
 	
-SRC_FILES = main parsing utils
+SRC_FILES = main parsing utils exec
 B_SRC_FILES = 
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -80,6 +80,6 @@ bonus: $(B_OBJ)
 			@echo "$(MAGENTA)$(NAME) bonus compiled!$(DEF_COLOR)"
 
 test:
-			./pipex infile "ls -l" "wc -l" outfile
+			./pipex infile.txt "cat -e" "wc -l" outfile.txt
 
 .PHONY: all clean fclean re norm test
