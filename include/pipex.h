@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:56:08 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/20 16:20:46 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:43:16 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ typedef struct s_data
 	char	***args;
 	char	**command;
 	int		n_args;
-	int		fd_in;
-	int		fd_out;
-	int		i;
+	int		fd_infile;
+	int		fd_outfile;
 
 }			t_data;
 

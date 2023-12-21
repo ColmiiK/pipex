@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/19 15:32:34 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:48:58 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	ft_access_cmds(t_data *data)
 		while (data->path[++j])
 		{
 			temp = ft_strjoin(data->path[j], data->args[i][0]);
+			if (ft_strnstr(temp, "usr", ft_strlen(temp)))
+				temp[1] = '.';
 			if (access(temp, F_OK) != -1 && access(temp, X_OK) != -1)
 			{
 				data->command[++k] = ft_strdup(temp);
