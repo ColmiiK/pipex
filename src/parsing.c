@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/21 12:48:58 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:03:26 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	ft_access_cmds(t_data *data)
 		}
 	}
 	data->command[k + 1] = NULL;
-	return ;
 }
 
 static void	ft_parse_cmds(t_data *data, int ac, char **av)

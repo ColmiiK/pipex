@@ -6,13 +6,13 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:43:44 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/21 12:43:28 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:03:36 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-void	ft_forking(char **envp, char *cmd, char **args)
+static void	ft_forking(char **envp, char *cmd, char **args)
 {
 	pid_t pid;
 	int pipe_fd[2];
@@ -36,7 +36,7 @@ void	ft_forking(char **envp, char *cmd, char **args)
 	}	
 }
 
-void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
+static void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
 {
 	pid_t pid;
 	pid = fork();

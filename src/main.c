@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/21 13:01:02 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:37:22 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int main(int ac, char **av, char **envp)
 		ft_perror("Error: unable to malloc (data).");
 	if (ac != 5)
 		ft_perror("Error: incorrect number of arguments.");
-	//atexit(leaks);
+	// atexit(leaks);
 	ft_setup(data, ac, av);
 	ft_parsing(data, envp, ac, av);
-	// debug_print(data, ac);
+	debug_print(data, ac);
 	ft_execute(data, envp);
 	ft_annihilation(data);
 	return (0);
