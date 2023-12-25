@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/18 17:50:37 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/25 14:34:07 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ void ft_annihilation_2(t_data *data)
 	i = -1;
 	while (++i <= data->n_args)
 	{
-		j = -1;
+		j = 0;
 		if (data->args)
 		{
-			while (data->args[i][++j])
+			if (data->args[i][j])
+			{
+			while (data->args[i][j++])
 				free(data->args[i][j]);
 			free(data->args[i]);
+			}
 		}
 	}
 	if (data->args)
@@ -50,7 +53,7 @@ void	ft_annihilation(t_data *data)
 		if (data->path)
 			free(data->path);
 	}
-	ft_annihilation_2(data);
+	// ft_annihilation_2(data);
 	i = -1;
 	if (data->command)
 	{
@@ -61,4 +64,48 @@ void	ft_annihilation(t_data *data)
 		free(data->command);
 	free(data);
 	return ;
+}
+
+static void ft_join(t_data *data, char **matrix, int index)
+{
+	char *joined;
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	joined = ft_calloc(1, 1);
+	while (matrix[++i])
+	{
+		joined = ft_strjoin(joined, matrix[i]);
+		joined[ft_strlen(joined)] = ' ';
+	}
+	joined[ft_strlen(joined) - 2] = 0;
+	data->args[index][1] = joined + 1;
+	while (data->args[index][++j])
+	{
+		data->args[index][j] = NULL;
+	}	
+}
+
+void ft_fix_awk(t_data *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = 0;
+	while (data->args[++i])
+	{
+		if (data->args[i][1][0] == '\'')
+		{
+			while (data->args[i][j])
+				j++;
+			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1]) - 1] == '\'')
+			{
+				ft_join(data, data->args[i], i);
+				return ;
+			}
+		}
+	}
 }

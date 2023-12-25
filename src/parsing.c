@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/21 13:03:26 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/25 14:33:14 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,16 @@ static void	ft_parse_envp(t_data *data, char **envp)
 
 void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 {
+	int i;
+
+	i = -1;
 	ft_parse_envp(data, envp);
 	ft_parse_cmds(data, ac, av);
+	while (data->args[++i][0])
+	{
+		if (ft_strnstr(data->args[i][0], "awk", 4))
+			ft_fix_awk(data);
+	}
 	ft_access_cmds(data);
 	return ;
 }
