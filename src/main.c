@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/25 10:26:49 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/25 10:32:36 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 	
 	TODO:
 	-> Add a flag that detects <'> and doesn't split until it detects another <'>
+		Check av[i] before ft_split, if there is <'>, skip until another <'>, then continue ft_split as usual
 	-> <$2> not detected, maybe doing ^ fixes it?
 	-> Check for leaks on Mac, no leaks on Linux
 	-> Remove Linux fix in parsing commands (usr)
