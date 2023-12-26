@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/25 14:34:07 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/26 13:21:52 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,19 @@ void ft_annihilation_2(t_data *data)
 	int i;
 	int j;
 
-	i = -1;
-	while (++i <= data->n_args)
+	i = 0;
+	while (i <= data->n_args)
 	{
 		j = 0;
-		if (data->args)
+		while (data->args[i][j])
 		{
-			if (data->args[i][j])
-			{
-			while (data->args[i][j++])
-				free(data->args[i][j]);
-			free(data->args[i]);
-			}
+			free(data->args[i][j]);
+			j++;
 		}
+		free(data->args[i]);
+		i++;
 	}
-	if (data->args)
-		free(data->args);
+	free(data->args);
 }
 
 void	ft_annihilation(t_data *data)
@@ -53,7 +50,7 @@ void	ft_annihilation(t_data *data)
 		if (data->path)
 			free(data->path);
 	}
-	// ft_annihilation_2(data);
+	ft_annihilation_2(data);
 	i = -1;
 	if (data->command)
 	{
@@ -66,27 +63,57 @@ void	ft_annihilation(t_data *data)
 	return ;
 }
 
-static void ft_join(t_data *data, char **matrix, int index)
+// static void ft_join(t_data *data, char **matrix, int index)
+// {
+// 	char *temp;
+// 	int i;
+// 	int j;
+
+// 	i = 0;
+// 	j = 1;
+// 	temp = ft_calloc(1, 1);
+// 	while (matrix[++i])
+// 	{
+// 		temp = ft_strjoin(temp, matrix[i]);
+// 		temp[ft_strlen(temp)] = ' ';
+// 	}
+// 	temp[ft_strlen(temp) - 2] = 0;
+// 	data->args[index][1] = ft_strdup(temp + 1);
+// 	free(temp);
+// 	while (data->args[index][++j])
+// 	{
+// 		free(data->args[index][j]);
+// 		data->args[index][j] = NULL;
+// 	}
+// }
+static void ft_join(char **matrix, t_data *data, int index)
 {
-	char *joined;
+	char *temp;
+	char *old_temp;
 	int i;
 	int j;
 
+	temp = ft_calloc(1, 1);
 	i = 0;
 	j = 1;
-	joined = ft_calloc(1, 1);
 	while (matrix[++i])
 	{
-		joined = ft_strjoin(joined, matrix[i]);
-		joined[ft_strlen(joined)] = ' ';
+		old_temp = temp;
+		temp = ft_strjoin(temp, matrix[i]);
+		free(old_temp);
+		temp[ft_strlen(temp)] = ' ';
 	}
-	joined[ft_strlen(joined) - 2] = 0;
-	data->args[index][1] = joined + 1;
+	temp[ft_strlen(temp) - 2] = 0;
+	temp = ft_strtrim(temp, "'");
+	ft_printf("%s\n", temp);
+	data->args[index][1] = temp;
 	while (data->args[index][++j])
 	{
+		free(data->args[index][j]);
 		data->args[index][j] = NULL;
-	}	
+	}
 }
+
 
 void ft_fix_awk(t_data *data)
 {
@@ -103,7 +130,8 @@ void ft_fix_awk(t_data *data)
 				j++;
 			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1]) - 1] == '\'')
 			{
-				ft_join(data, data->args[i], i);
+				// ft_join(data, data->args[i], i);
+				ft_join(data->args[i], data, i);
 				return ;
 			}
 		}
