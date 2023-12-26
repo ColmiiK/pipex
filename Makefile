@@ -25,7 +25,7 @@ WHITE = \033[0;97m
 #Sources
 	
 SRC_FILES = main parsing utils exec
-B_SRC_FILES = 
+B_SRC_FILES = main_bonus parsing_bonus utils_bonus exec_bonus
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 B_SRC = $(addprefix $(B_SRC_DIR), $(addsuffix .c, $(B_SRC_FILES)))

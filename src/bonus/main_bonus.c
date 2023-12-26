@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 18:37:43 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:40:50 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 /*	./pipex infile.txt "awk '{print $2}'" "cat -e" outfile.txt
 
@@ -61,8 +61,6 @@ int main(int ac, char **av, char **envp)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		ft_perror("Error: unable to malloc (data).");
-	if (ac != 5)
-		ft_perror("Error: incorrect number of arguments.");
 	ft_setup(data, ac, av);
 	ft_parsing(data, envp, ac, av);
 	debug_print(data, ac);
