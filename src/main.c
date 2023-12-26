@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 11:48:19 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/26 13:45:12 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 
 /*	./pipex infile.txt "awk '{print $2}'" "cat -e" outfile.txt
 
-	awk
-	'{print
-	}'
-	
-	instead of 
-	awk
-	'{print $2}'
-	
 	TODO:
-	-> Freeing memory correctly; currently pointers are lost on data->args
-	-> Check for leaks on Mac, no leaks on Linux
 	-> Remove Linux fix in parsing commands (usr)
 	-> Create bonus files and add n pipes (remove limitation in main)
 	-> Implement here_doc (Create temporal file at start, use it as the first fd instead of STDIN_FILENO)

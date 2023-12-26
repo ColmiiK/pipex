@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 13:21:52 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/26 13:44:48 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,8 @@ void	ft_annihilation(t_data *data)
 	return ;
 }
 
-// static void ft_join(t_data *data, char **matrix, int index)
-// {
-// 	char *temp;
-// 	int i;
-// 	int j;
 
-// 	i = 0;
-// 	j = 1;
-// 	temp = ft_calloc(1, 1);
-// 	while (matrix[++i])
-// 	{
-// 		temp = ft_strjoin(temp, matrix[i]);
-// 		temp[ft_strlen(temp)] = ' ';
-// 	}
-// 	temp[ft_strlen(temp) - 2] = 0;
-// 	data->args[index][1] = ft_strdup(temp + 1);
-// 	free(temp);
-// 	while (data->args[index][++j])
-// 	{
-// 		free(data->args[index][j]);
-// 		data->args[index][j] = NULL;
-// 	}
-// }
-static void ft_join(char **matrix, t_data *data, int index)
+static char *ft_join(char **matrix, t_data *data, int index)
 {
 	char *temp;
 	char *old_temp;
@@ -95,7 +73,7 @@ static void ft_join(char **matrix, t_data *data, int index)
 
 	temp = ft_calloc(1, 1);
 	i = 0;
-	j = 1;
+	j = 0;
 	while (matrix[++i])
 	{
 		old_temp = temp;
@@ -103,17 +81,16 @@ static void ft_join(char **matrix, t_data *data, int index)
 		free(old_temp);
 		temp[ft_strlen(temp)] = ' ';
 	}
+	free(temp);
 	temp[ft_strlen(temp) - 2] = 0;
 	temp = ft_strtrim(temp, "'");
-	ft_printf("%s\n", temp);
-	data->args[index][1] = temp;
 	while (data->args[index][++j])
 	{
 		free(data->args[index][j]);
 		data->args[index][j] = NULL;
 	}
+	return (temp);
 }
-
 
 void ft_fix_awk(t_data *data)
 {
@@ -130,8 +107,7 @@ void ft_fix_awk(t_data *data)
 				j++;
 			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1]) - 1] == '\'')
 			{
-				// ft_join(data, data->args[i], i);
-				ft_join(data->args[i], data, i);
+				data->args[i][1] = ft_join(data->args[i], data, i);
 				return ;
 			}
 		}
