@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 18:25:37 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:30:19 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_parse_cmds(t_data *data, int ac, char **av)
 
 	i = -1;
 	j = 1;
-	data->args = (char ***)malloc(sizeof(char **) * (ac - 2));
+	data->args = (char ***)ft_calloc(ac - 1, sizeof(char **));
 	if (!data->args)
 		ft_perror("Error: unable to malloc (data->args).");
 	while (++j < (ac - 1))
@@ -56,7 +56,7 @@ static void	ft_parse_cmds(t_data *data, int ac, char **av)
 	data->args[++i] = ft_calloc(1, 1);
 	if (!data->args[i])
 		ft_perror("Error: unable to malloc (data->args[i]).");
-	data->command = (char **)malloc(sizeof(char *) * (ac - 2));
+	data->command = (char **)ft_calloc(ac - 2, sizeof(char *));
 	if (!data->command)
 		ft_perror("Error: unable to malloc (data->command).");
 	return ;
@@ -77,7 +77,7 @@ static void	ft_parse_envp(t_data *data, char **envp)
 			while (data->path[++i])
 			{
 				j = ft_strlen(data->path[i]);
-				data->path[i] = ft_realloc(data->path[i], j + 2);
+				data->path[i] = ft_realloc(data->path[i], j + 1, j + 2);
 				if (!data->path[i])
 					ft_perror("Error: unable to realloc (data->path[i]).");
 				data->path[i][j] = '/';
@@ -95,16 +95,16 @@ void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 	i = -1;
 	ft_parse_envp(data, envp);
 	ft_parse_cmds(data, ac, av);
-	while (data->args[++i][0])
+	ft_access_cmds(data);
+	while (data->args[++i] && data->args[i][0])
 	{
 		if (ft_strnstr(data->args[i][0], "awk", 4))
 			ft_fix_awk(data);
 	}
-	ft_access_cmds(data);
 	i = 0;
 	while (data->command[i])
 		i++;
 	if (i != data->n_args)
-		ft_perror("Error: all commands were not found.");
+		ft_printf("command not found\n");
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:56:08 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/25 14:34:05 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:19:44 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_data
 	int		n_args;
 	int		fd_infile;
 	int		fd_outfile;
+	char	*temp;
+	char	*old_temp;
 }			t_data;
 
 void		ft_parsing(t_data *data, char **envp, int ac, char **av);

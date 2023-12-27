@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:56:19 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/14 11:46:24 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:31:21 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -500,6 +500,6 @@ char				*get_next_line(int fd);
  * @return A pointer to the reallocated memory block, or NULL if the operation
  * failed.
  */
-void				*ft_realloc(void *ptr, size_t new_size);
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif

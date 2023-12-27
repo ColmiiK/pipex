@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 18:37:43 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:40:47 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,30 @@ void debug_print(t_data *data, int ac)
 
 static void ft_setup(t_data *data, int ac, char **av)
 {
+	data = ft_memset(data, 0, sizeof(t_data));
 	data->n_args = ac - 3;
 	data->fd_infile = open(av[1], O_RDONLY, 0644);
 	data->fd_outfile = open (av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	dup2(data->fd_infile, STDIN_FILENO);
 }
 
+void ft_leaks(void)
+{
+	system("leaks -q pipex");
+}
 int main(int ac, char **av, char **envp)
 {
 	t_data *data;
 
+	if (ac != 5)
+		ft_perror("Error: incorrect number of arguments.");
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		ft_perror("Error: unable to malloc (data).");
-	if (ac != 5)
-		ft_perror("Error: incorrect number of arguments.");
 	ft_setup(data, ac, av);
 	ft_parsing(data, envp, ac, av);
-	debug_print(data, ac);
+	// debug_print(data, ac);
+	// atexit(ft_leaks);
 	ft_execute(data, envp);
 	ft_annihilation(data);
 	return (0);

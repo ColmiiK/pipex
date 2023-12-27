@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:11:01 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/14 11:33:46 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:00:42 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*fill(const char *s, int start, int end)
 	char	*dest;
 
 	i = 0;
-	dest = (char *)malloc((end - start + 1) * sizeof(char));
+	dest = (char *)ft_calloc(end - start + 1, sizeof(char));
 	if (!dest)
 		return (0);
 	while (start < end)
@@ -62,7 +62,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	index = -1;
-	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	split = (char **)ft_calloc(word_count(s, c) + 1, sizeof(char *));
 	if (!s || !split)
 		return (0);
 	while (i <= ft_strlen(s))
