@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/27 13:34:26 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:06:33 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ static void ft_setup(t_data *data, int ac, char **av)
 {
 	data = ft_memset(data, 0, sizeof(t_data));
 	data->n_args = ac - 3;
+	data->i = -1;
+	data->j = -1;
+	data->k = -1;
+	data->flag = 1;
 	data->fd_infile = open(av[1], O_RDONLY, 0644);
 	data->fd_outfile = open (av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->fd_outfile == -1)
+		exit(EXIT_FAILURE);
 	dup2(data->fd_infile, STDIN_FILENO);
 }
 
@@ -72,7 +78,7 @@ int main(int ac, char **av, char **envp)
 		ft_perror("Error: unable to malloc (data).");
 	ft_setup(data, ac, av);
 	ft_parsing(data, envp, ac, av);
-	// debug_print(data, ac);
+	//debug_print(data, ac);
 	// atexit(ft_leaks);
 	ft_execute(data, envp);
 	ft_annihilation(data);

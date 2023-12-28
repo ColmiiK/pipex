@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/26 18:38:43 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:24:24 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,30 @@ void	ft_annihilation(t_data *data)
 
 static char *ft_join(char **matrix, t_data *data, int index)
 {
-	char *temp;
-	char *old_temp;
 	int i;
 	int j;
 
-	temp = ft_calloc(1, 1);
+	data->temp = ft_calloc(1, 1);
 	i = 0;
 	j = 0;
 	while (matrix[++i])
 	{
-		old_temp = temp;
-		temp = ft_strjoin(temp, matrix[i]);
-		free(old_temp);
-		temp[ft_strlen(temp)] = ' ';
+		data->old_temp = data->temp;
+		data->temp = ft_strjoin(data->temp, matrix[i]);
+		free(data->old_temp);
+		data->old_temp = data->temp;
+		data->temp = ft_strjoin(data->temp, " ");
+		free(data->old_temp);
 	}
-	free(temp);
-	temp[ft_strlen(temp) - 2] = 0;
-	temp = ft_strtrim(temp, "'");
+	data->old_temp = data->temp;
+	data->temp = ft_strtrim(data->temp, "' ");
+	free(data->old_temp);
 	while (data->args[index][++j])
 	{
 		free(data->args[index][j]);
 		data->args[index][j] = NULL;
 	}
-	return (temp);
+	return (data->temp);
 }
 
 void ft_fix_awk(t_data *data)

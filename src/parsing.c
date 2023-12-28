@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/27 13:30:19 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:03:49 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 static void	ft_access_cmds(t_data *data)
 {
-	int		i;
-	int		j;
-	int		k;
 	char	*temp;
 
-	i = -1;
-	k = -1;
-	while (data->args[++i][0])
+	while (data->args[++data->i][0])
 	{
-		j = -1;
-		while (data->path[++j])
+		data->j = -1;
+		while (data->path[++data->j])
 		{
-			temp = ft_strjoin(data->path[j], data->args[i][0]);
+			temp = ft_strjoin(data->path[data->j], data->args[data->i][0]);
 			if (ft_strnstr(temp, "usr", 5))
 				temp[1] = '.';
 			if (access(temp, F_OK) != -1 && access(temp, X_OK) != -1)
 			{
-				data->command[++k] = ft_strdup(temp);
-				if (!data->command[k])
+				data->flag = 0;
+				data->command[++data->k] = ft_strdup(temp);
+				if (!data->command[data->k])
 					ft_perror("Error: unable to strdup (data->command[k]).");
 			}
 			free(temp);
 		}
+		if (data->flag == 1)
+			data->command[++data->k] = ft_strdup("");
+		data->flag = 1;
 	}
-	data->command[k + 1] = NULL;
+	data->command[data->k + 1] = NULL;
 }
 
 static void	ft_parse_cmds(t_data *data, int ac, char **av)
@@ -101,10 +100,5 @@ void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 		if (ft_strnstr(data->args[i][0], "awk", 4))
 			ft_fix_awk(data);
 	}
-	i = 0;
-	while (data->command[i])
-		i++;
-	if (i != data->n_args)
-		ft_printf("command not found\n");
 	return ;
 }

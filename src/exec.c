@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:43:44 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/21 13:03:36 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:29:20 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ static void	ft_forking(char **envp, char *cmd, char **args)
 	{
 		close(pipe_fd[0]);
 		dup2(pipe_fd[1], STDOUT_FILENO);
-		execve(cmd, args, envp);
+		if (execve(cmd, args, envp) == -1)
+		{
+			write(pipe_fd[1], "", 0);
+			exit(EXIT_FAILURE);
+		}
+		
 	}
 	else
 	{
@@ -39,17 +44,29 @@ static void	ft_forking(char **envp, char *cmd, char **args)
 static void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
 {
 	pid_t pid;
+	int status;
+
 	pid = fork();
 	if (pid == -1)
 		ft_perror("Error: last fork.");
 	if (pid == 0)
 	{
 		dup2(data->fd_outfile, STDOUT_FILENO);
-		execve(cmd, args, envp);
+		if (execve(cmd, args, envp) == -1)
+		{
+			ft_putendl_fd("command not found", STDERR_FILENO);
+			ft_annihilation(data);
+			exit(EXIT_FAILURE);
+		}
+
 	}
 	else
-		return ;
-	
+	{
+		waitpid(pid, &status, 0);
+		ft_annihilation(data);
+		if (WIFEXITED(status))
+			exit(WEXITSTATUS(status));
+	}
 }
 
 void	ft_execute(t_data *data, char **envp)
