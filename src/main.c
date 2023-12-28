@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:06:33 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:46:08 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 /*	./pipex infile.txt "awk '{print $2}'" "cat -e" outfile.txt
 
 	TODO:
-	-> Conditional jumps (unitialized values (data->args[i][0]))
-	-> command not found
-	
 	-> Remove Linux fix in parsing commands (usr)
 	-> Implement here_doc (Create temporal file at start, use it as the first fd instead of STDIN_FILENO)
+		if (ft_strnstr(av[1], "here_doc", ft_strlen(av[1])))
+		{
+			data->fd_infile = open(a)
+		}
 	-> Check norminette
-	-> Catch edge cases (awk printf, etc.)
-
-	if (ft_strnstr(av[1], "here_doc", ft_strlen(av[1])))
-	{
-		data->fd_infile = open(a)
-	}
+	-> "" inside arguments
+	
 
 */
 
