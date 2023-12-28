@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:03:49 by alvega-g         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:44:37 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ static void	ft_parse_cmds(t_data *data, int ac, char **av)
 		ft_perror("Error: unable to malloc (data->args).");
 	while (++j < (ac - 1))
 		data->args[++i] = ft_split(av[j], ' ');
-	data->args[++i] = ft_calloc(1, 1);
+	data->args[++i] = malloc(sizeof(char *));
 	if (!data->args[i])
-		ft_perror("Error: unable to malloc (data->args[i]).");
+		ft_perror("Error: unable to malloc (data-args[i])");
+	data->args[i][0] = NULL;
 	data->command = (char **)ft_calloc(ac - 2, sizeof(char *));
 	if (!data->command)
 		ft_perror("Error: unable to malloc (data->command).");
