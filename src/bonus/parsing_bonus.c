@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 12:29:05 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:43:52 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 static void	ft_access_cmds(t_data *data)
 {
@@ -44,7 +44,7 @@ static void	ft_parse_cmds(t_data *data, int ac, char **av)
 	int	j;
 
 	i = -1;
-	j = 1;
+	j = 1 + data->here_flag;
 	data->args = (char ***)ft_calloc(ac - 1, sizeof(char **));
 	if (!data->args)
 		ft_perror("Error: unable to malloc (data->args).");
@@ -98,7 +98,7 @@ void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 	{
 		if (ft_strnstr(data->args[i][0], "awk", 4)
 			|| ft_strnstr(data->args[i][0], "sed", 4))
-			ft_fix_awk(data, av[i + 2]);
+			ft_fix_awk(data, av[i + 2 + data->here_flag]);
 	}
 	return ;
 }

@@ -6,11 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:29:56 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 13:46:07 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:33:48 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 static char	*ft_join_single(char **matrix, t_data *data, int index)
 {

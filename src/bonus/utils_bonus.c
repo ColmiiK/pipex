@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 12:31:22 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:03:03 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 static void	ft_annihilation_2(t_data *data)
 {
@@ -55,6 +55,42 @@ void	ft_annihilation(t_data *data)
 		free(data->command);
 	free(data);
 	return ;
+}
+
+static void	ft_here_doc_child(char *limit, int fd[2])
+{
+	char	*line;
+
+	ft_putstr_fd(">", 0);
+	line = get_next_line(STDIN_FILENO);
+	if (ft_strncmp(line, limit, ft_strlen(limit)) == 0)
+		exit(EXIT_SUCCESS);
+	ft_putstr_fd(line, fd[1]);
+	free(line);
+}
+
+void	ft_here_doc(char *limit)
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		ft_perror("Error: pipe");
+	pid = fork();
+	if (pid == -1)
+		ft_perror("Error: fork");
+	if (pid == 0)
+	{
+		close(fd[0]);
+		while (true)
+			ft_here_doc_child(limit, fd);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		wait(NULL);
+	}
 }
 
 void	ft_perror(char *str)

@@ -69,14 +69,12 @@ re:			fclean all
 			@echo "$(MAGENTA)$(NAME) recompiled!$(DEF_COLOR)"
 
 norm:
-			@norminette $(SRC) $(B_SRC) $(INCLUDE) $(LIBFT)/src
+			@norminette $(SRC) $(B_SRC) $(INCLUDE) $(LIBFT)
 
 bonus: $(B_OBJ)
 			@make -C $(LIBFT)
 			@$(CC) $(CFLAGS) $(B_OBJ) -L$(LIBFT) -lft -o $(NAME)
 			@echo "$(MAGENTA)$(NAME) bonus compiled!$(DEF_COLOR)"
 
-test:
-			./pipex infile.txt "cat -e" "wc -l" outfile.txt
 
-.PHONY: all clean fclean re norm test
+.PHONY: all clean fclean re norm bonus
