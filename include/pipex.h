@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:56:08 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:03:33 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:10:53 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ typedef struct s_data
 	int		i;
 	int		j;
 	int		k;
-	int 	flag;
+	int		flag;
+	int		comma_flag;
 }			t_data;
 
 void		ft_parsing(t_data *data, char **envp, int ac, char **av);
-void		ft_fix_awk(t_data *data);
+void		ft_fix_awk(t_data *data, char *str);
 void		ft_perror(char *str);
 void		ft_annihilation(t_data *data);
 void		ft_execute(t_data *data, char **envp);

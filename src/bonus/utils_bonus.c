@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:24:24 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 11:15:09 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_perror(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void ft_annihilation_2(t_data *data)
+void	ft_annihilation_2(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i <= data->n_args)
@@ -63,11 +63,10 @@ void	ft_annihilation(t_data *data)
 	return ;
 }
 
-
-static char *ft_join(char **matrix, t_data *data, int index)
+static char	*ft_join(char **matrix, t_data *data, int index)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	data->temp = ft_calloc(1, 1);
 	i = 0;
@@ -92,10 +91,10 @@ static char *ft_join(char **matrix, t_data *data, int index)
 	return (data->temp);
 }
 
-void ft_fix_awk(t_data *data)
+void	ft_fix_awk(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = 0;
@@ -105,7 +104,8 @@ void ft_fix_awk(t_data *data)
 		{
 			while (data->args[i][j])
 				j++;
-			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1]) - 1] == '\'')
+			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1])
+				- 1] == '\'')
 			{
 				data->args[i][1] = ft_join(data->args[i], data, i);
 				return ;

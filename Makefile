@@ -24,7 +24,7 @@ WHITE = \033[0;97m
 
 #Sources
 	
-SRC_FILES = main parsing utils exec
+SRC_FILES = main parsing utils utils_2 exec
 B_SRC_FILES = main_bonus parsing_bonus utils_bonus exec_bonus
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -71,10 +71,10 @@ re:			fclean all
 norm:
 			@norminette $(SRC) $(B_SRC) $(INCLUDE) $(LIBFT)/src
 
-bonus: $(B_OBJ)
-			@make -C $(LIBFT)
-			@$(CC) $(CFLAGS) $(B_OBJ) -L$(LIBFT) -lft -o $(NAME)
-			@echo "$(MAGENTA)$(NAME) bonus compiled!$(DEF_COLOR)"
+# bonus: $(B_OBJ)
+# 			@make -C $(LIBFT)
+# 			@$(CC) $(CFLAGS) $(B_OBJ) -L$(LIBFT) -lft -o $(NAME)
+# 			@echo "$(MAGENTA)$(NAME) bonus compiled!$(DEF_COLOR)"
 
 test:
 			./pipex infile.txt "cat -e" "wc -l" outfile.txt

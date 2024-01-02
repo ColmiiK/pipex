@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:43:44 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:29:20 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:10:50 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,36 @@
 
 static void	ft_forking(char **envp, char *cmd, char **args)
 {
-	pid_t pid;
-	int pipe_fd[2];
-	
+	pid_t	pid;
+	int		pipe_fd[2];
+
 	if (pipe(pipe_fd) == -1)
 		ft_perror("Error: pipe.");
 	pid = fork();
 	if (pid == -1)
 		ft_perror("Error: fork.");
-	
 	if (pid == 0)
 	{
 		close(pipe_fd[0]);
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		if (execve(cmd, args, envp) == -1)
 		{
+			ft_putendl_fd("command not found", STDERR_FILENO);
 			write(pipe_fd[1], "", 0);
 			exit(EXIT_FAILURE);
 		}
-		
 	}
 	else
 	{
 		close(pipe_fd[1]);
 		dup2(pipe_fd[0], STDIN_FILENO);
-	}	
+	}
 }
 
 static void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
 {
-	pid_t pid;
-	int status;
+	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -58,7 +57,6 @@ static void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
 			ft_annihilation(data);
 			exit(EXIT_FAILURE);
 		}
-
 	}
 	else
 	{
@@ -71,7 +69,7 @@ static void	ft_last_fork(t_data *data, char **envp, char *cmd, char **args)
 
 void	ft_execute(t_data *data, char **envp)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < (data->n_args - 1))

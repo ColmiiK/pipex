@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2023/12/28 11:44:37 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:29:05 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	ft_access_cmds(t_data *data)
 		while (data->path[++data->j])
 		{
 			temp = ft_strjoin(data->path[data->j], data->args[data->i][0]);
-			if (ft_strnstr(temp, "usr", 5))
-				temp[1] = '.';
 			if (access(temp, F_OK) != -1 && access(temp, X_OK) != -1)
 			{
 				data->flag = 0;
@@ -90,7 +88,7 @@ static void	ft_parse_envp(t_data *data, char **envp)
 
 void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	ft_parse_envp(data, envp);
@@ -98,8 +96,9 @@ void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 	ft_access_cmds(data);
 	while (data->args[++i] && data->args[i][0])
 	{
-		if (ft_strnstr(data->args[i][0], "awk", 4))
-			ft_fix_awk(data);
+		if (ft_strnstr(data->args[i][0], "awk", 4)
+			|| ft_strnstr(data->args[i][0], "sed", 4))
+			ft_fix_awk(data, av[i + 2]);
 	}
 	return ;
 }
