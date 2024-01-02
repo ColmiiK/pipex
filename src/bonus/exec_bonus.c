@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_bonus.c                                       :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:43:44 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 11:14:42 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:10:50 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
+#include <pipex.h>
 
 static void	ft_forking(char **envp, char *cmd, char **args)
 {
@@ -28,6 +28,7 @@ static void	ft_forking(char **envp, char *cmd, char **args)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		if (execve(cmd, args, envp) == -1)
 		{
+			ft_putendl_fd("command not found", STDERR_FILENO);
 			write(pipe_fd[1], "", 0);
 			exit(EXIT_FAILURE);
 		}

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_bonus.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:50:00 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 11:15:06 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:29:05 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
+#include <pipex.h>
 
 static void	ft_access_cmds(t_data *data)
 {
@@ -96,8 +96,9 @@ void	ft_parsing(t_data *data, char **envp, int ac, char **av)
 	ft_access_cmds(data);
 	while (data->args[++i] && data->args[i][0])
 	{
-		if (ft_strnstr(data->args[i][0], "awk", 4))
-			ft_fix_awk(data);
+		if (ft_strnstr(data->args[i][0], "awk", 4)
+			|| ft_strnstr(data->args[i][0], "sed", 4))
+			ft_fix_awk(data, av[i + 2]);
 	}
 	return ;
 }

@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:02:38 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 11:15:09 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:31:22 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
+#include <pipex.h>
 
-void	ft_perror(char *str)
-{
-	ft_printf("%s\n", str);
-	exit(EXIT_FAILURE);
-}
-
-void	ft_annihilation_2(t_data *data)
+static void	ft_annihilation_2(t_data *data)
 {
 	int	i;
 	int	j;
@@ -63,53 +57,8 @@ void	ft_annihilation(t_data *data)
 	return ;
 }
 
-static char	*ft_join(char **matrix, t_data *data, int index)
+void	ft_perror(char *str)
 {
-	int	i;
-	int	j;
-
-	data->temp = ft_calloc(1, 1);
-	i = 0;
-	j = 0;
-	while (matrix[++i])
-	{
-		data->old_temp = data->temp;
-		data->temp = ft_strjoin(data->temp, matrix[i]);
-		free(data->old_temp);
-		data->old_temp = data->temp;
-		data->temp = ft_strjoin(data->temp, " ");
-		free(data->old_temp);
-	}
-	data->old_temp = data->temp;
-	data->temp = ft_strtrim(data->temp, "' ");
-	free(data->old_temp);
-	while (data->args[index][++j])
-	{
-		free(data->args[index][j]);
-		data->args[index][j] = NULL;
-	}
-	return (data->temp);
-}
-
-void	ft_fix_awk(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (data->args[++i])
-	{
-		if (data->args[i][1][0] == '\'')
-		{
-			while (data->args[i][j])
-				j++;
-			if (j > 0 && data->args[i][j - 1][ft_strlen(data->args[i][j - 1])
-				- 1] == '\'')
-			{
-				data->args[i][1] = ft_join(data->args[i], data, i);
-				return ;
-			}
-		}
-	}
+	ft_putendl_fd(str, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }

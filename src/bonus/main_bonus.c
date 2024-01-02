@@ -6,48 +6,11 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 11:15:02 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/02 13:49:47 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
-
-/*	./pipex infile.txt "awk '{print $2}'" "cat -e" outfile.txt
-
-	TODO:
-	-> Remove Linux fix in parsing commands (usr)
-	-> Create bonus files and add n pipes (remove limitation in main)
-	-> Implement here_doc (Create temporal file at start,
-		use it as the first fd instead of STDIN_FILENO)
-	-> Check norminette
-	-> Catch edge cases (awk printf, etc.)
-
-	if (ft_strnstr(av[1], "here_doc", ft_strlen(av[1])))
-	{
-		data->fd_infile = open(a)
-	}
-	void	debug_print(t_data *data, int ac)
-	{
-		ft_printf("Paths:\n");
-		for (int i = 0; data->path[i]; i++)
-			ft_printf("%s\n", data->path[i]);
-		ft_printf("\nArguments:\n");
-		for (int i = 0; i < (ac - 3); i++)
-		{
-			for (int j = 0; data->args[i][j]; j++)
-				ft_printf("%s\n", data->args[i][j]);
-			ft_printf("\n");
-		}
-		ft_printf("\nCommands:\n");
-		for (int i = 0; data->command[i]; i++)
-			ft_printf("%s\n", data->command[i]);
-	}
-
-	void	ft_leaks(void)
-	{
-		system("leaks -q pipex");
-	}
-*/
+#include <pipex.h>
 
 static void	ft_setup(t_data *data, int ac, char **av)
 {
@@ -71,10 +34,10 @@ int	main(int ac, char **av, char **envp)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		ft_perror("Error: unable to malloc (data).");
+	if (!envp || !*envp)
+		ft_perror("Error: no environment.");
 	ft_setup(data, ac, av);
 	ft_parsing(data, envp, ac, av);
-	// debug_print(data, ac);
-	// atexit(ft_leaks);
 	ft_execute(data, envp);
 	ft_annihilation(data);
 	return (0);
