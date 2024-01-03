@@ -6,7 +6,7 @@
 /*   By: alvega-g <alvega-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:57:17 by alvega-g          #+#    #+#             */
-/*   Updated: 2024/01/02 17:10:50 by alvega-g         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:21:19 by alvega-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	*data;
 
+	if (ac < 5)
+		ft_perror("Error: too few arguments.");
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		ft_perror("Error: unable to malloc (data).");

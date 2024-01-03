@@ -7,7 +7,7 @@ SRC_DIR = src/
 B_SRC_DIR = src/bonus/
 OBJ_DIR = obj/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 
 # Colors
